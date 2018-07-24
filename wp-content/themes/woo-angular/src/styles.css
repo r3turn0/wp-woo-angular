@@ -1,0 +1,194 @@
+/* You can add global styles to this file, and also import other style files */
+/* ---------- RESET ---------- */
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, font, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td {
+	border: 0;
+	font-size: 100%;
+	font-style: inherit;
+	font-weight: inherit;
+	margin: 0;
+	outline: 0;
+	padding: 0;
+	vertical-align: baseline;
+}
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+main,
+nav,
+section {
+	display: block;
+}
+html, body{
+	overflow-x: hidden;
+	-webkit-text-size-adjust: 100%;
+	-ms-text-size-adjust: 100%;
+	moz-text-size-adjust: 100%;
+}
+/* The width and height properties of ALL ELEMENTS (and min/max properties) includes content, padding and border, but not the margin */
+*,
+*:before,
+*:after {
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+}
+body {
+	background: #fff;
+}
+table {
+	/* tables still need 'cellspacing="0"' in the markup */
+	border-collapse: separate;
+	border-spacing: 0;
+}
+caption,
+th,
+td {
+	font-weight: normal;
+	text-align: left;
+}
+blockquote:before,
+blockquote:after,
+q:before,
+q:after {
+	content: "";
+	content: none;
+}
+blockquote,
+q {
+	-webkit-hyphens: none;
+	-moz-hyphens: none;
+	-ms-hyphens: none;
+	hyphens: none;
+	quotes: none;
+}
+a:focus {
+	outline: 0;
+}
+a:hover,
+a:active {
+	outline: 0;
+	cursor: pointer;
+}
+a:active {
+	text-decoration: none;
+}
+a img {
+	border: 0;
+}
+img {
+	width: 100%;
+	height: auto;
+}
+a, button {
+	outline: none !important;
+}
+/* ---------- TYPOGRAPHY ---------- */
+body,
+button,
+input,
+select,
+textarea {
+	color: black;
+	font-size: 15px;
+	line-height: 1.6;
+	letter-spacing: .4px;
+}
+button, a {
+	text-decoration: none;
+	text-transform: uppercase;
+	border-radius: 0 !important;
+}
+label {
+	font-weight: 300;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	clear: both;
+}
+/* ---------- MAIN HEADING SYTLES ---------- */
+h1 {
+	font-size: 36px;
+	font-weight: 700;
+	line-height: 1.09091;
+}
+h2 {
+	font-size: 30px;
+	font-weight: 700;
+	line-height: 1.2;
+}
+h3 {
+	font-size: 26px;
+	font-weight: 400;
+	line-height: 1.33333;
+}
+/* ---------- SUB HEADING STYLES ---------- */
+h4 {
+	font-size: 23px;
+	font-weight: 700;
+	line-height: 2.25;
+}
+h5 {
+	font-size: 20px;
+	font-weight: 400;
+	line-height: 2.25;
+	text-transform: uppercase;
+}
+h6 {
+	font-size: 17px;
+	font-weight: 600;
+	line-height: 2.57143;
+	text-transform: uppercase;
+}
+b, strong {
+	font-weight: 700;
+}
+/* ---------- SITE CLASSES ---------- */
+.clear {
+	content: "";
+	display: table;
+	clear: both;
+}
+/* ---------- MEDIA QUERIES ---------- */
+@media screen and (max-width: 767px){
+	body,
+	button,
+	input,
+	select,
+	textarea {
+		font-size: 14px;
+	}
+	/* ---------- MAIN HEADING SYTLES ---------- */
+	h1 {
+		font-size: 23px;
+		line-height: 1.09091;
+	}
+	h2 {
+		font-size: 21px;
+		line-height: 1.2;
+	}
+	h3 {
+		font-size: 19px;
+		line-height: 1.33333;
+	}
+	/* ---------- SUB HEADING STYLES ---------- */
+	h4 {
+		font-size: 18px;
+		line-height: 2.25;
+	}
+	h5 {
+		font-size: 16px;
+		line-height: 2.25;
+	}
+	h6 {
+		font-size: 14px;
+		line-height: 2.57143;
+	}
+}

@@ -1,0 +1,13 @@
+<div id="posts-block " class="page-wrap" *ngIf="slug === page.slug">
+    <h1 [innerHTML] = "page.title.rendered"></h1>
+    <section [innerHTML] = "page.content.rendered"></section>
+    <ul id="categories" *ngIf="categories">
+        <li *ngFor="let category of categories">
+            <button *ngIf="selectedCategoryId === category.id" class="cat-btn active" (click)="setSelectedCategory(category.id, category.name)" [innerHTML]="category.name"></button>
+            <button *ngIf="selectedCategoryId !== category.id" class="cat-btn" (click)="setSelectedCategory(category.id, category.name)" [innerHTML]="category.name"></button>
+        </li>
+    </ul>
+    <section>
+        <app-posts-detail [categoryId]="selectedCategoryId" [categoryName]="selectedCategoryName"></app-posts-detail>
+    </section>
+</div>

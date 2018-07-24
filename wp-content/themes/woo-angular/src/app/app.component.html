@@ -1,0 +1,13 @@
+<header>
+    <a routerLink='' *ngIf="settings" [innerHTML]="settings.title"></a>
+    <nav *ngIf="pages">
+        <ul>
+            <li *ngFor="let page of pages">
+                <a routerLink="/{{page.slug}}" [innerHTML]="page.slug"></a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<router-outlet></router-outlet>
+
+

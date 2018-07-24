@@ -1,0 +1,12 @@
+<!--<h6 *ngIf="posts" id="selected-cat">{{categoryName}}<span *ngIf="(post of posts | filterByCategory:categoryId)?.length > 0">:&nbsp;({{(post of posts | filterByCategory:categoryId)?.length}})</span></h6>
+<ul *ngIf="posts" id="posts">
+  <li class="post" *ngFor="let post of posts | filterByCategory:categoryId">
+    <a class="post-link" routerLink="{{post.slug}}">
+      <img class="post-img" src="{{post.featured_image}}"/>
+      <ul class="post-categories" *ngIf="post.categoryNames">
+        <li class="post-title"><h4 class="post-title">{{post.title.rendered}}</h4></li>
+        <li class="category-name" *ngFor="let names of post.categoryNames">{{names}}</li>
+      </ul>
+    </a>
+  </li>
+</ul>-->
