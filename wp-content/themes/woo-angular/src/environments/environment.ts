@@ -8,7 +8,7 @@ export const environment = {
   production: false,
   wpBase: '//localhost/woo-angular/wp-json/wp/v2/',
   host: '//localhost/woo-angular',
-  origin: '//localhost/woo-angular/appwoo/wc-api/v3',
+  origin: '//localhost/woo-angular/wp-json/wc/v2',
   woocommerce: {
     consumer_key:  'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx',
     consumer_secret: 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx'
