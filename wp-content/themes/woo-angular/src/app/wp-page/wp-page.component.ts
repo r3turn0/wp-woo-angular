@@ -3,6 +3,7 @@ import { WpPage } from '../wp-page';
 import { WpPost } from '../wp-post';
 import { WpPagesService } from '../wp-pages.service';
 import { WpPostsService } from '../wp-posts.service';
+import {  WoocommerceProductsService } from 'ngx-wooapi';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 import { HttpErrorResponse } from '@angular/common/http';
 import { environment } from '../../environments/environment';
@@ -14,8 +15,6 @@ import 'rxjs/add/operator/switchMap';
   styleUrls: ['./wp-page.component.css']
 })
 export class WpPageComponent implements OnInit {
-
-  private host = environment.host;
 
   page: WpPage;
 
@@ -38,11 +37,16 @@ export class WpPageComponent implements OnInit {
     );
   }
 
-  constructor(private WpPagesService: WpPagesService, private WpPostsService:WpPostsService, private route: ActivatedRoute) { }
+  constructor(private WpPagesService: WpPagesService, private WpPostsService:WpPostsService, private WoocommerceProductsService: WoocommerceProductsService, private route: ActivatedRoute) { }
 
   ngOnInit() {
     this.getPage();
     this.getPosts();
+    this.WoocommerceProductsService.retrieveProducts().subscribe(response => {
+      console.log(response);
+    }, err => {
+      console.log(err);
+    });
   }
 
 }
