@@ -7,6 +7,7 @@ import { WpPageComponent } from './wp-page/wp-page.component';
 import { PageContentComponent } from './wp-page/page-content/page-content.component';
 import { WpPagesService } from './wp-pages.service';
 import { WpPostsService } from './wp-posts.service';
+import { WpMediaService } from './wp-media.service';
 import { FilterByCategory } from './filterByCategory';
 import { HttpIntercept } from './httpintercept';
 import { WoocommerceProductsService, WoocommerceHelperService} from 'ngx-wooapi';
@@ -26,6 +27,7 @@ import { WoocommerceProductsService, WoocommerceHelperService} from 'ngx-wooapi'
   providers: [
     WpPagesService, 
     WpPostsService,
+    WpMediaService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: HttpIntercept,
