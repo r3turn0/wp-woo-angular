@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { WpPage } from './wp-page';
 import { WpSiteSettings } from './wp-site-settings';
 import { WpPagesService } from './wp-pages.service';
-import { ActivatedRoute, ParamMap } from '@angular/router';
 import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
@@ -25,7 +24,7 @@ export class AppComponent {
   }
 
   getPages() : void {
-    this.WpPagesService.getPages().subscribe((pages: WpPage[]) => this.pages = pages,(err: HttpErrorResponse) => err.error instanceof Error ? console.log('Error loading pages: ', err.error.message) : console.log(`Backend returned code: ${err.status} body was: ${err.error}`));
+    this.WpPagesService.getPages(null).subscribe((pages: WpPage[]) => this.pages = pages,(err: HttpErrorResponse) => err.error instanceof Error ? console.log('Error loading pages: ', err.error.message) : console.log(`Backend returned code: ${err.status} body was: ${err.error}`));
   }
 
   constructor(private WpPagesService: WpPagesService){}

@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { WpPage } from '../wp-page';
+import { WpPost } from '../wp-post';
 import { WpPagesService } from '../wp-pages.service';
+import { WpPostsService } from '../wp-posts.service';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 import { HttpErrorResponse } from '@angular/common/http';
 import { environment } from '../../environments/environment';
@@ -15,82 +17,32 @@ export class WpPageComponent implements OnInit {
 
   private host = environment.host;
 
-  pages: WpPage[];
-
   page: WpPage;
-  
-  nextPage: WpPage;
-  
-  prevPage: WpPage;
-  
-  getNextPage(page:WpPage) : void {
-    //console.log('pages: ', pages);
-    const order = page.menu_order;
-    //console.log('currentOrder: ' + order);
-    var nextIdx = order + 1;
-    //console.log('nextIdx: ' + nextIdx);
-    if(this.pages){
-      if(nextIdx >= this.pages.length){
-        nextIdx = 0;
-      }
-      var nextPage;
-      this.pages.forEach(function(page){
-        if(nextIdx === page.menu_order){
-          nextPage = page;
-        }
-      });
-      this.WpPagesService.getPage(nextPage.slug).subscribe( (page:WpPage[]) => this.nextPage = page[0]);
-    }
-  }
 
-  getPrevPage(page:WpPage) : void {
-    //console.log('pages: ', pages);
-    const order = page.menu_order;
-    //console.log('currentOrder: ' + order);
-    var prevIdx = order - 1;
-    //console.log('prevIdx: ' + prevIdx);
-    if(this.pages){
-      if(prevIdx < 0){
-        prevIdx = this.pages.length - 1;
-      }
-      var prevPage;
-      this.pages.forEach(function(page){
-        if(prevIdx === page.menu_order){
-          prevPage = page;
-        }
-      });
-      this.WpPagesService.getPage(prevPage.slug).subscribe( (page:WpPage[]) => this.prevPage = page[0]);
-    }
-  }
+  posts: WpPost[];
 
   getPage() : void {
     this.route.paramMap
     .switchMap( (params: ParamMap) =>
       this.WpPagesService.getPage(params.get('slug'))).
       subscribe(
-        (page: WpPage[]) => {this.page = page[0]; this.redirectHome(this.page)},
+        (page: WpPage[]) => {this.page = page[0]; },
         (err: HttpErrorResponse) => err.error instanceof Error ? console.log('Error loading pages: ', err.error.message) : console.log(`Backend returned code: ${err.status} body was: ${err.error}`)
       );
   }
 
-  redirectHome(page) : void {
-    if(!page){
-      window.location.replace(this.host);
-    }
-    else{
-      //this.getNextPage(page); 
-      //this.getPrevPage(page);
-    }
+  getPosts() : void {
+    this.WpPostsService.getPosts(null).subscribe(
+      (posts: WpPost[]) => { this.posts = posts; },
+      (err: HttpErrorResponse) => err.error instanceof Error ? console.log('Error loading posts: ', err.error.message) : console.log(`Backend returned code: ${err.status} body was: ${err.error}`)
+    );
   }
 
-  pageInit() : void {
-    this.WpPagesService.getPages().subscribe( (pages:WpPage[]) => {this.pages = pages; this.getPage(); } );
-  }
-
-  constructor(private WpPagesService: WpPagesService, private route: ActivatedRoute) { }
+  constructor(private WpPagesService: WpPagesService, private WpPostsService:WpPostsService, private route: ActivatedRoute) { }
 
   ngOnInit() {
-    this.pageInit();
+    this.getPage();
+    this.getPosts();
   }
 
 }

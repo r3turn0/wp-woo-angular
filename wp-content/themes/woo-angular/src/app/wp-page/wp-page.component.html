@@ -1,12 +1,5 @@
 <div class="page-container" *ngIf="page">
-    <!--<a *ngIf="prevPage" routerLink="/{{prevPage.slug}}" >
-          Prev
-        </a>
-    <a *ngIf="nextPage" routerLink="/{{nextPage.slug}}" >
-      Next
-    </a>-->
   <section class="page-content">
-    <app-home-content [page]="page"></app-home-content>
-    <app-posts-content [page]="page"></app-posts-content>
+      <app-page-content [page]="page"></app-page-content>
   </section>
 </div>

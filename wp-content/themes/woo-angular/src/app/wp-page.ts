@@ -1,4 +1,5 @@
 export class WpPage {
+    id: number;
     slug: string;
     link: string;
     title: {
@@ -12,4 +13,5 @@ export class WpPage {
     };
     status: string;
     menu_order: number;
+    featured_image: string;
 }

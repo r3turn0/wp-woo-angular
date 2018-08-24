@@ -11,8 +11,14 @@ export class WpPagesService {
   private _wpBase = environment.wpBase;
 
   constructor(private http: HttpClient) { }
-      getPages(): Observable<WpPage[]> {
-        return this.http.get<WpPage[]>(this._wpBase + 'pages');
+      getPages(query:string): Observable<WpPage[]> {
+        var q = query ? query : '';
+        if(q) { 
+          return this.http.get<WpPage[]>(this._wpBase + `pages?${q}`);
+        }
+        else {
+          return this.http.get<WpPage[]>(this._wpBase + 'pages');
+        }
       }
       getPage(slug:string): Observable<WpPage[]> {
         return this.http.get<WpPage[]>(this._wpBase + `pages?slug=${slug}`);

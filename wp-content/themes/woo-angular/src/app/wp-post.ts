@@ -13,4 +13,5 @@ export class WpPost {
     status: string;
     categories: number [];
     tags: string [];
+    featured_image: string;
 }

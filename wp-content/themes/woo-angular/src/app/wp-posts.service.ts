@@ -11,11 +11,23 @@ export class WpPostsService {
   private _wpBase = environment.wpBase;
 
   constructor(private http: HttpClient) { }
-      getCategories():Observable<WpCategory[]> {
-        return this.http.get<WpCategory[]>(this._wpBase + 'categories');
+      getCategories(query:string):Observable<WpCategory[]> {
+        var q = query ? query : '';
+        if(q) {
+          return this.http.get<WpCategory[]>(this._wpBase + `categories?${q}`);
+        }
+        else{
+          return this.http.get<WpCategory[]>(this._wpBase + 'catogories');
+        }
       }
-      getPosts(): Observable<WpPost[]> {
-        return this.http.get<WpPost[]>(this._wpBase + 'posts');
+      getPosts(query:string): Observable<WpPost[]> {
+        var q = query ? query : '';
+        if(q) {
+          return this.http.get<WpPost[]>(this._wpBase + `posts?${q}`);
+        }
+        else{
+          return this.http.get<WpPost[]>(this._wpBase + 'posts');
+        }
       }
       getPost(slug:string): Observable<WpPost[]> {
         return this.http.get<WpPost[]>(this._wpBase + `posts?slug=${slug}`);
