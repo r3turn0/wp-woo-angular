@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { WpPage } from '../../wp-page';
+import { WpPage } from '../../types';
 
 @Component({
   selector: 'app-page-content',

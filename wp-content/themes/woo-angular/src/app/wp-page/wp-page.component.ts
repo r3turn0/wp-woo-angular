@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { WpPage, WpPost } from '../types';
-import { WpPagesService } from '../wp-pages.service';
-import { WpPostsService } from '../wp-posts.service';
+import { WpApiService } from '../wp-api.service';
 import { WoocommerceProductsService } from 'ngx-wooapi';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 import { HttpErrorResponse } from '@angular/common/http';
@@ -21,7 +20,7 @@ export class WpPageComponent implements OnInit {
   getPage() : void {
     this.route.paramMap
     .switchMap( (params: ParamMap) =>
-      this.WpPagesService.getPage(params.get('slug'))).
+      this.WpApiService.getPage(params.get('slug'))).
       subscribe(
         (page: WpPage[]) => {this.page = page[0]; },
         (err: HttpErrorResponse) => err.error instanceof Error ? console.log('Error loading pages: ', err.error.message) : console.log(`Backend returned code: ${err.status} body was: ${err.error}`)
@@ -29,13 +28,13 @@ export class WpPageComponent implements OnInit {
   }
 
   getPosts() : void {
-    this.WpPostsService.getPosts(null).subscribe(
+    this.WpApiService.getPosts(null).subscribe(
       (posts: WpPost[]) => { this.posts = posts; },
       (err: HttpErrorResponse) => err.error instanceof Error ? console.log('Error loading posts: ', err.error.message) : console.log(`Backend returned code: ${err.status} body was: ${err.error}`)
     );
   }
 
-  constructor(private WpPagesService: WpPagesService, private WpPostsService:WpPostsService, private WoocommerceProductsService: WoocommerceProductsService, private route: ActivatedRoute) { }
+  constructor(private WpApiService: WpApiService,private WoocommerceProductsService: WoocommerceProductsService, private route: ActivatedRoute) { }
 
   ngOnInit() {
     this.getPage();

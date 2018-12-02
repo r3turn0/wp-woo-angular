@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
-import { WpPage } from './wp-page';
-import { WpSiteSettings } from './wp-site-settings';
-import { WpPagesService } from './wp-pages.service';
+import { Settings, WpPage } from './types';
+import { WpApiService } from './wp-api.service';
 import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
@@ -13,21 +12,21 @@ export class AppComponent {
   
   pages: WpPage [];
 
-  settings: WpSiteSettings;
+  settings: Settings;
 
   getSettings() : void {
-    this.WpPagesService.getSiteSettings().
+    this.WpApiService.getSiteSettings().
     subscribe(
-      (settings: WpSiteSettings) => this.settings = settings,
+      (settings: Settings) => this.settings = settings,
       (err: HttpErrorResponse) => err.error instanceof Error ? console.log('Error loading settings: ', err.error.message) : console.log(`Backend returned code: ${err.status} body was: ${err.error}`)
     )
   }
 
   getPages() : void {
-    this.WpPagesService.getPages(null).subscribe((pages: WpPage[]) => this.pages = pages,(err: HttpErrorResponse) => err.error instanceof Error ? console.log('Error loading pages: ', err.error.message) : console.log(`Backend returned code: ${err.status} body was: ${err.error}`));
+    this.WpApiService.getPages(null).subscribe((pages: WpPage[]) => this.pages = pages,(err: HttpErrorResponse) => err.error instanceof Error ? console.log('Error loading pages: ', err.error.message) : console.log(`Backend returned code: ${err.status} body was: ${err.error}`));
   }
 
-  constructor(private WpPagesService: WpPagesService){}
+  constructor(private WpApiService: WpApiService){}
   
   ngOnInit(){
     this.getPages();

@@ -12,6 +12,7 @@ import { HttpIntercept } from './httpintercept';
 import { WoocommerceProductsService, WoocommerceOrderService, WoocommerceCouponService, WoocommerceHelperService } from 'ngx-wooapi';
 import { WpApiService } from './wp-api.service';
 import { WcApiService } from './wc-api.service';
+import { EmailService } from './email.service';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import { WcApiService } from './wc-api.service';
   imports: [
     BrowserModule,
     HttpClientModule,
+    HttpClientJsonpModule,
     AppRoutingModule,
     FormsModule
   ],
@@ -32,6 +34,7 @@ import { WcApiService } from './wc-api.service';
   providers: [
     WpApiService,
     WcApiService,
+    EmailService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: HttpIntercept,
