@@ -7,12 +7,11 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { WpPageComponent } from './wp-page/wp-page.component';
 import { PageContentComponent } from './wp-page/page-content/page-content.component';
-import { WpPagesService } from './wp-pages.service';
-import { WpPostsService } from './wp-posts.service';
-import { WpMediaService } from './wp-media.service';
 import { FilterByCategory } from './filterByCategory';
 import { HttpIntercept } from './httpintercept';
 import { WoocommerceProductsService, WoocommerceOrderService, WoocommerceCouponService, WoocommerceHelperService } from 'ngx-wooapi';
+import { WpApiService } from './wp-api.service';
+import { WcApiService } from './wc-api.service';
 
 @NgModule({
   declarations: [
@@ -31,9 +30,8 @@ import { WoocommerceProductsService, WoocommerceOrderService, WoocommerceCouponS
     BrowserAnimationsModule
   ],
   providers: [
-    WpPagesService, 
-    WpPostsService,
-    WpMediaService,
+    WpApiService,
+    WcApiService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: HttpIntercept,

@@ -47,11 +47,13 @@ export class WpPage {
     parent: number;
     featured_image: string;
 }
+
 export class WpMenus {
     term_id: number;
     name: string;
     slug: string;
 }
+
 export class WpMenu {
     ID: number;
     name: string;
@@ -76,6 +78,7 @@ export class WpMenu {
     ];
     display: string;
 }
+
 export class WpPost {
     id: number;
     slug: string;
@@ -93,6 +96,7 @@ export class WpPost {
     tags: string [];
     featured_image: string;
 }
+
 export class WpCategory { // Post Categories
     id: number;
     description: string;
@@ -100,6 +104,7 @@ export class WpCategory { // Post Categories
     name: string;
     slug: string;
 }
+
 export class WpMedia {
     id: number;
     slug: string;
@@ -139,6 +144,7 @@ export class WpMedia {
     }
     source_url: string;
 }
+
 // WOOCOMMERCE TYPES
 export class WcCustomer {
     id: number;
@@ -172,6 +178,7 @@ export class WcCustomer {
         country: string;
     };
 }
+
 export class WpUser {
     avatar: string;
     description: string;
@@ -183,47 +190,18 @@ export class WpUser {
     url: string;
     username: string;
 }
-export class UserCredentials {
-    constructor(
-        public email: string,
-        public password1: string,
-        public password2: string
-    ){ }
-}
-export class WcCustomerAccountDetails {
-    constructor (
-        public first_name: string,
-        public last_name: string,
-        public email: string,
-        public currentPassword: string,
-        public newPassword1: string,
-        public newPassword2: string
-    ){}
-}
-export class WcCustomerAccountAddresses {
-    constructor (
-        public first_name: string,
-        public last_name: string,
-        public company: string,
-        public address_1: string,
-        public address_2: string,
-        public city: string,
-        public state: string,
-        public postcode: string,
-        public country: string,
-        public email: string,
-        public phone: string
-    ){}
-}
+
 export class WcCountry {
     code: string;
     name: string;
     states: WcState [];
 }
+
 export class WcState {
     code: string;
     name: string;
 }
+
 export class WcCart { 
     key:string;
     product_id:number;
@@ -241,6 +219,7 @@ export class WcCart {
     data: {};
     product_name:string;
 }
+
 export class WcPaymentGateway {
     id:string;	
     title:string;	
@@ -269,14 +248,17 @@ export class WcPaymentGateway {
         }	
     }	
 }
+
 export class WcShippingZones {
     id:number;	
     name:string;
 }
+
 export class WcShippingZoneLocations {
     code:string;	
     type:string;
 }
+
 export class WcShippingZoneMethods {
     instance_id: number;
     title:string;	
@@ -295,11 +277,13 @@ export class WcShippingZoneMethods {
         }
     }
 }
+
 export class WcShippingMethods {
     id: string;
     title:string;	
     description:string;	
 }
+
 export class WcTaxRates {
     id:number;
     country:string;
