@@ -15,6 +15,8 @@ export class WpPageComponent implements OnInit {
 
   page: WpPage;
 
+  pages: WpPage[];
+
   posts: WpPost[];
 
   getPage() : void {
@@ -25,6 +27,10 @@ export class WpPageComponent implements OnInit {
         (page: WpPage[]) => {this.page = page[0]; },
         (err: HttpErrorResponse) => err.error instanceof Error ? console.log('Error loading pages: ', err.error.message) : console.log(`Backend returned code: ${err.status} body was: ${err.error}`)
       );
+  }
+
+  getPages() : void {
+    this.WpApiService.getPages(null).subscribe((pages: WpPage[]) => this.pages = pages,(err: HttpErrorResponse) => err.error instanceof Error ? console.log('Error loading pages: ', err.error.message) : console.log(`Backend returned code: ${err.status} body was: ${err.error}`));
   }
 
   getPosts() : void {
@@ -39,6 +45,7 @@ export class WpPageComponent implements OnInit {
   ngOnInit() {
     this.getPage();
     this.getPosts();
+    this.getPages();
     this.WoocommerceProductsService.retrieveProducts().subscribe(response => {
       console.log(response);
     }, err => {

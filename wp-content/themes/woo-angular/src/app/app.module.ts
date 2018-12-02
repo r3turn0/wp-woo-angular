@@ -10,6 +10,7 @@ import { PageContentComponent } from './wp-page/page-content/page-content.compon
 import { FilterByCategory } from './filterByCategory';
 import { HttpIntercept } from './httpintercept';
 import { WoocommerceProductsService, WoocommerceOrderService, WoocommerceCouponService, WoocommerceHelperService } from 'ngx-wooapi';
+import { AppService } from './app.service';
 import { WpApiService } from './wp-api.service';
 import { WcApiService } from './wc-api.service';
 import { EmailService } from './email.service';
@@ -32,6 +33,7 @@ import { EmailService } from './email.service';
     BrowserAnimationsModule
   ],
   providers: [
+    AppService,
     WpApiService,
     WcApiService,
     EmailService,

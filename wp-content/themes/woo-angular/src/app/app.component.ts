@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { Settings, WpPage } from './types';
+import { Settings, WpPage, WcCart, WpMenu } from './types';
+import { AppService } from './app.service';
 import { WpApiService } from './wp-api.service';
 import { HttpErrorResponse } from '@angular/common/http';
 
@@ -9,28 +10,41 @@ import { HttpErrorResponse } from '@angular/common/http';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  
-  pages: WpPage [];
 
   settings: Settings;
 
+  cart: WcCart;
+
+  menus: WpMenu[];
+  
+  pages: WpPage [];
+
   getSettings() : void {
-    this.WpApiService.getSiteSettings().
+    this.AppService.getSettings.
     subscribe(
-      (settings: Settings) => this.settings = settings,
-      (err: HttpErrorResponse) => err.error instanceof Error ? console.log('Error loading settings: ', err.error.message) : console.log(`Backend returned code: ${err.status} body was: ${err.error}`)
+      (settings: Settings) => { 
+        this.settings = settings 
+      }
     )
   }
 
-  getPages() : void {
-    this.WpApiService.getPages(null).subscribe((pages: WpPage[]) => this.pages = pages,(err: HttpErrorResponse) => err.error instanceof Error ? console.log('Error loading pages: ', err.error.message) : console.log(`Backend returned code: ${err.status} body was: ${err.error}`));
+  getCart() : void {
+    this.AppService.getCart.subscribe((cart:WcCart) => {
+      this.cart = cart;
+    });
   }
 
-  constructor(private WpApiService: WpApiService){}
+  getMenu() : void {
+    this.AppService.getMenus.subscribe((menus:WpMenu[]) => {
+      this.menus = menus;
+    });
+  }
+
+  constructor(private AppService: AppService){}
   
   ngOnInit(){
-    this.getPages();
     this.getSettings();
+    this.getCart();
   }
 
 }
