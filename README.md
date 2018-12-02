@@ -9,3 +9,5 @@ I used a WooCommerce Angular wrapper named ngx-wooapi: https://www.npmjs.com/pac
 Use the buildProd/buildTest.cmd for deployment. Change the urls accordingly.
 
 Finally adjust appropriately the project name and environments.
+
+Update 12/1/2018 - Added polyfills packages from polyfill.ts and ran yarn upgrade. This gave access to more ngx-wooapi services.

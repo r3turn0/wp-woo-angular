@@ -1,5 +1,6 @@
 {
   "dependencies": {
-    "ngx-wooapi": "^5.0.12"
+    "jquery": "^3.3.1",
+    "ngx-wooapi": "5.x.x"
   }
 }

@@ -60,7 +60,11 @@ core-js@^2.4.1:
   version "2.5.7"
   resolved "https://registry.yarnpkg.com/core-js/-/core-js-2.5.7.tgz#f972608ff0cead68b841a16a932d0b183791814e"
 
-ngx-wooapi@^5.0.12:
+jquery@^3.3.1:
+  version "3.3.1"
+  resolved "https://registry.yarnpkg.com/jquery/-/jquery-3.3.1.tgz#958ce29e81c9790f31be7792df5d4d95fc57fbca"
+
+ngx-wooapi@5.x.x:
   version "5.0.12"
   resolved "https://registry.yarnpkg.com/ngx-wooapi/-/ngx-wooapi-5.0.12.tgz#7ba50c1dfdbfb1bd8e8343826099ce46d8fab15f"
   dependencies:
