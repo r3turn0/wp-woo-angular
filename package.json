@@ -1,0 +1,5 @@
+{
+  "dependencies": {
+    "ngx-wooapi": "^5.0.12"
+  }
+}

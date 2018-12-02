@@ -1,12 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { WpPage } from '../wp-page';
-import { WpPost } from '../wp-post';
+import { WpPage, WpPost } from '../types';
 import { WpPagesService } from '../wp-pages.service';
 import { WpPostsService } from '../wp-posts.service';
-import {  WoocommerceProductsService } from 'ngx-wooapi';
+import { WoocommerceProductsService } from 'ngx-wooapi';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 import { HttpErrorResponse } from '@angular/common/http';
-import { environment } from '../../environments/environment';
 import 'rxjs/add/operator/switchMap';
 
 @Component({

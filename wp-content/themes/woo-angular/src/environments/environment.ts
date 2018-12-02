@@ -7,6 +7,9 @@
 export const environment = {
   production: false,
   wpBase: '//localhost/woo-angular/wp-json/wp/v2/',
+  wpMenuBase: '//localhost/woo-angular/wp-json/wp-api-menus/v2/menus/',
+  wcBase: '//localhost/woo-angular/wp-json/wc/v2/',
+  api: '//localhost/woo-angular/api/',
   host: '//localhost/woo-angular',
   origin: '//localhost/woo-angular/wp-json/wc/v2',
   woocommerce: {

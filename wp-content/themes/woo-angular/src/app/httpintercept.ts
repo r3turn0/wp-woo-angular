@@ -18,7 +18,12 @@ private includeWooAuth(url) {
     const hasQuery = url.includes('?');
     let return_url = '';
     if (hasQuery) {
-    return_url =  wooAuth;
+        if(url.includes('=')){
+            return_url =  '&' + wooAuth;
+        }
+        else{
+            return_url =  wooAuth;
+        }
     } else {
     return_url = '?' + wooAuth;
     }
@@ -33,11 +38,18 @@ intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<an
     } else {
         requestUrl = `${environment.origin}${environment.wcEndpoint}/${request.url}${this.includeWooAuth(request.url)}`;
     }*/
-    if (request.url.includes('wp-json')) {
-        requestUrl = `${request.url}`;
-    } else {
-        //requestUrl = `${environment.origin}${environment.wcEndpoint}/${request.url}${this.includeWooAuth(request.url)}`;
-        requestUrl = `${environment.origin}/${request.url}${this.includeWooAuth(request.url)}`;
+    if (!request.url.includes('email.php') && !request.url.includes('userRegister.php') && !request.url.includes('api') && !request.url.includes('post-json')){
+        if (request.url.includes('wp-json') && !(request.url.includes('wc'))) {
+            requestUrl = `${request.url}`;
+        } else {
+            if(request.url.includes('wc')){ // cart api
+                requestUrl = `${request.url}${this.includeWooAuth(request.url)}`;    
+            }
+            else{ // ngx-woo
+                requestUrl = `${environment.origin}/${request.url}${this.includeWooAuth(request.url)}`;
+            }
+            //requestUrl = `${environment.origin}${environment.wcEndpoint}/${request.url}${this.includeWooAuth(request.url)}`;
+        }   
     }
     authRequest = request.clone({
         url: requestUrl

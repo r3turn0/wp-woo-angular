@@ -19,29 +19,36 @@ function nt_cors_enable() {
 add_action( 'after_setup_theme', 'SITENAME_setup' );
 function SITENAME_setup() {
 	load_theme_textdomain( 'SITENAME', get_template_directory() . '/languages' );
+	add_theme_support( 'title-tag' );
 	add_theme_support( 'post-thumbnails' );
 	set_post_thumbnail_size( 840, 0 );
 	add_image_size( 'landscape', 560, 420, true );
 	add_image_size( 'portrait', 480, 640, true );
 	add_image_size( 'square', 480, 480, true );
-	/*global $content_width;
-	if ( ! isset( $content_width ) ) $content_width = 640;
-		register_nav_menus(
-		array( 'main_menu' => __( 'Main Menu', 'SITENAME navigation' ) )
-	);*/
+	register_nav_menus(
+		array( 'Main Menu' => __( 'Main Menu', 'SITENAME Navigation' ) )
+	);
 }
 
-/*add_action( 'widgets_init', 'SITENAME_widgets_init' );
-function SITENAME_widgets_init() {
-	register_sidebar( array (
-		'name' => __( 'Sidebar Widget', 'SITENAME' ),
-		'id' => 'sidebar-widget',
-		'before_widget' => '<div class="widget-container">',
-		'after_widget' => '</div>',
-		'before_title' => '<h3 class="widget-title">',
-		'after_title' => '</h3>',
-	) );
-}*/
+add_filter( 'the_title', 'SITENAME_title' );
+function SITENAME_title( $title ) {
+	if ( $title == '' ) {
+		return '&rarr;';
+	} else {
+		return $title;
+	}
+}
+
+add_filter( 'wp_title', 'SITENAME_filter_wp_title' );
+function SITENAME_filter_wp_title( $title ) {
+	return $title . esc_attr( get_bloginfo( 'name' ) );
+}
+
+// Add filter for title separator
+function change_title_separator(){
+	return ' | ';
+}
+add_filter('document_title_separator', 'change_title_separator');
 
 /* ------------- SHOW ALL CATEGORIES ------------ */
 add_filter( 'widget_categories_args', 'wpb_force_empty_cats' );
@@ -99,12 +106,93 @@ function add_site_settings() {
 	$logo = getCustomLogo();
 	$theme = wp_get_theme();
 	$version = $theme->get('Version');
+	$frontPageID = (int)get_option( 'page_on_front' );
+	$frontPage = get_post($frontPageID, ARRAY_A);
+	$frontPageSlug = $frontPage['post_name'];
+	$shopPageID = (int)get_option( 'woocommerce_shop_page_id' ); 
+	$shopPage = get_post($shopPageID, ARRAY_A);
+	$shopPageSlug = $shopPage['post_name'];
+	$myAccountPageID = (int)get_option( 'woocommerce_myaccount_page_id' ); 
+	$myAccountPage = get_post($myAccountPageID, ARRAY_A);
+	$myAccountPageSlug = $myAccountPage['post_name'];
+	$checkoutPageID = (int)get_option( 'woocommerce_checkout_page_id' ); 
+	$checkoutPage = get_post($checkoutPageID, ARRAY_A);
+	$checkoutPageSlug = $checkoutPage['post_name'];
+	$termsPageID = (int)get_option( 'woocommerce_terms_page_id' ); 
+	$termsPage = get_post($termsPageID, ARRAY_A);
+	$termsPageSlug = $termsPage['post_name'];
+	$email1 = '';
+	$email2 = '';
+	$fbLink = '';
+	$igLink = '';
+	$twLink = '';
+	$ytLink = '';
+	$mailchimpEndpoint = '';
+	$mailchimpHiddenField = '';
+	$paypalLiveAPI = '';
+	$paypalProdClientId = '';
+	$paypalSandboxClientId = '';
+	if($social['email1']){
+		$email1 = stripslashes($social['email1']);
+	}
+	if($social['email2']){
+		$email2 = stripslashes($social['email2']);
+	}
+	if($social['facebook_link'] && $social['facebook_show'] == 1){
+		$fbLink = stripslashes($social['facebook_link']);
+	}
+	if($social['instagram_link'] && $social['instagram_show'] == 1){
+		$igLink = stripslashes($social['instagram_link']);
+	}
+	if($social['twitter_link'] && $social['twitter_show'] == 1){
+		$twLink = stripslashes($social['twitter_link']);
+	}
+	if($social['youtube_link'] && $social['youtube_show'] == 1){
+		$ytLink = stripslashes($social['youtube_link']);
+	}
+	if($social['mailchimp-endpoint']){
+		$mailchimpEndpoint = stripslashes($social['mailchimp-endpoint']);
+	}
+	if($social['mailchimp-hidden-field']){
+		$mailchimpHiddenField = stripslashes($social['mailchimp-hidden-field']);
+	}
+	if($social['paypal_live_api']){
+		$paypalLiveAPI = $social['paypal_live_api'];
+	}
+	if($social['paypal-prod-clientid']){
+		$paypalProdClientId = stripslashes($social['paypal-prod-clientid']);
+	}
+	if($social['paypal-sandbox-clientid']){
+		$paypalSandboxClientId = stripslashes($social['paypal-sandbox-clientid']);
+	}
 	$settings = array(
 		'title' => $title,
 		'description' => $description,
 		'headerImage' => $headerImg,
 		'logo' => $logo,
-		'versions' => $theme->get('Version')
+		'version' => $version,
+		'frontPageID' => $frontPageID,
+		'frontPageSlug' => $frontPageSlug,
+		'shopPageID' => $shopPageID,
+		'shopPageSlug' => $shopPageSlug,
+		'myAccountPageSlug' => $myAccountPageSlug,
+		'myAccountPageID' => $myAccountPageID,
+		'checkoutPageSlug' => $checkoutPageSlug,
+		'checkoutPageID' => $checkoutPageID,
+		'termsPageID' => $termsPageID,
+		'termsPageSlug' => $termsPageSlug,
+		'infoEmail' => $email1,
+		'salesEmail' => $email2,
+		'facebook' => $fbLink ? $fbLink : '',
+		'instagram' => $igLink ? $igLink : '',
+		'twitter' => $twLink ? $twLink : '',
+		'youtube' => $ytLink ? $ytLink : '',
+		'mailchimpEndpoint' => $mailchimpEndpoint ? $mailchimpEndpoint : '',
+		'mailchimpHiddenField' => $mailchimpHiddenField ? $mailchimpHiddenField : '',
+		'paypalLiveAPI' => $paypalLiveAPI,
+		'paypalProdClientId' => $paypalProdClientId ? $paypalProdClientId : '',
+		'paypalSandboxClientId' => $paypalSandboxClientId ? $paypalSandboxClientId : '',
+		'baseCountry' => get_base_country()
 	);
 	return $settings;
 }
@@ -129,6 +217,14 @@ function insert_page_thumbnail_url(){
 		'schema'          => null,
 		)
 	);
+}
+
+function get_base_country() {
+	global $woocommerce;
+	$countries_obj = new WC_Countries();
+	$countries   = $countries_obj->__get('countries');
+	$def_country = $countries_obj->get_base_country();
+	return $def_country;
 }
 
 // register actions for WP REST API

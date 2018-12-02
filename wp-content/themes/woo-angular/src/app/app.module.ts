@@ -1,5 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
@@ -10,7 +12,7 @@ import { WpPostsService } from './wp-posts.service';
 import { WpMediaService } from './wp-media.service';
 import { FilterByCategory } from './filterByCategory';
 import { HttpIntercept } from './httpintercept';
-import { WoocommerceProductsService, WoocommerceHelperService} from 'ngx-wooapi';
+import { WoocommerceProductsService, WoocommerceOrderService, WoocommerceCouponService, WoocommerceHelperService } from 'ngx-wooapi';
 
 @NgModule({
   declarations: [
@@ -22,7 +24,11 @@ import { WoocommerceProductsService, WoocommerceHelperService} from 'ngx-wooapi'
   imports: [
     BrowserModule,
     HttpClientModule,
-    AppRoutingModule
+    AppRoutingModule,
+    FormsModule
+  ],
+  exports: [
+    BrowserAnimationsModule
   ],
   providers: [
     WpPagesService, 
@@ -34,7 +40,10 @@ import { WoocommerceProductsService, WoocommerceHelperService} from 'ngx-wooapi'
       multi: true
     },
     WoocommerceProductsService, 
-    WoocommerceHelperService
+    WoocommerceOrderService,
+    WoocommerceCouponService,
+    WoocommerceHelperService,
+    BrowserAnimationsModule
   ],
   bootstrap: [AppComponent]
 })
